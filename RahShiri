@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دنیای ویدیو</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Tahoma, sans-serif;
+    background: #000;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* پس زمینه ستاره ای */
+#stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+/* عنوان */
+header {
+    text-align: center;
+    padding: 45px 15px;
+}
+
+header h1 {
+    font-size: 35px;
+    color: #fff;
+    text-shadow: 0 0 15px #00c3ff;
+}
+
+header p {
+    margin-top: 15px;
+    color: #aaa;
+}
+
+/* بخش ویدیو */
+.video-section {
+    width: 90%;
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(20,20,35,0.85);
+    border: 1px solid #25255c;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,150,255,0.2);
+}
+
+.video-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00c3ff;
+}
+
+.video-section video {
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+    outline: none;
+}
+
+/* لینک ویدیو */
+.video-link {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.video-link input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #111;
+    color: white;
+}
+
+.video-link button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #008cff;
+    color: white;
+    cursor: pointer;
+}
+
+/* سازندگان */
+.credits {
+    width: 90%;
+    max-width: 850px;
+    margin: 35px auto;
+    padding: 25px;
+    background: rgba(15,15,30,0.9);
+    border: 1px solid #25255c;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.credits h2 {
+    color: #00c3ff;
+    margin-bottom: 25px;
+}
+
+.credit-item {
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    color: #ddd;
+    transition: 0.3s;
+}
+
+.credit-item:hover {
+    background: rgba(0,140,255,0.2);
+    transform: scale(1.02);
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<header>
+    <h1>🌌 دنیای ویدیو 🌌</h1>
+    <p>به دنیای شگفت‌انگیز ما خوش آمدید</p>
+</header>
+
+<section class="video-section">
+
+    <h2>🎬 تماشای ویدیو</h2>
+
+    <video id="myVideo" controls playsinline>
+        مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+    </video>
+
+    <div class="video-link">
+        <input
+            type="url"
+            id="videoURL"
+            placeholder="لینک مستقیم ویدیو را وارد کنید..."
+        >
+        <button onclick="loadVideo()">نمایش ویدیو</button>
+    </div>
+
+</section>
+
+<section class="credits">
+
+    <h2>⭐ سازندگان این پروژه ⭐</h2>
+
+    <div class="credit-item">
+        سازنده ی سایت : معین باقری
+    </div>
+
+    <div class="credit-item">
+        طراح ویدیو : متین باقری
+    </div>
+
+    <div class="credit-item">
+        سازنده ی سایت : متین باقری
+    </div>
+
+    <div class="credit-item">
+        صدابرداری : متین باقری
+    </div>
+
+</section>
+
+<footer>
+    ساخته شده با ❤️
+</footer>
+
+<script>
+
+// ساخت ستاره ها
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 180; i++) {
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    const size = Math.random() * 3 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.animationDuration =
+        (Math.random() * 3 + 1) + "s";
+
+    stars.appendChild(star);
+}
+
+// قرار دادن ویدیو
+function loadVideo() {
+
+    const url = document.getElementById("videoURL").value.trim();
+
+    const video = document.getElementById("myVideo");
+
+    if (!url) {
+        alert("لطفاً لینک ویدیو را وارد کنید!");
+        return;
+    }
+
+    video.src = url;
+    video.load();
+}
+
+</script>
+
+</body>
+</html>
